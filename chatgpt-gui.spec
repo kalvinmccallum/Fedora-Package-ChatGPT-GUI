@@ -19,7 +19,7 @@ Requires:       python3-tkinter
 ChatGPT GUI is an interactive GUI application for ChatGPT.
 
 %prep
-%autosetup -n %{name}-%{version} -p1
+%autosetup -n %{name}-%{version}
 
 %build
 
@@ -35,5 +35,7 @@ ChatGPT GUI is an interactive GUI application for ChatGPT.
 %{_datadir}/pixmaps/%{name}.png
 
 %changelog
-* Tue Mar 07 2023 Kalvin McCallum <kalvin_mccallum@student.uml.edu> - 0.3.9-1
-- Initial package for Fedora
+* Fri Mar 17 2023 Kalvin McCallum <kalvin_mccallum@student.uml.edu> - 0.4.1-1
+- Updated package version and release number
+- Removed the -p1 option in %prep section
+- No other changes made.
