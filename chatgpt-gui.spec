@@ -1,41 +1,42 @@
 Name:           chatgpt-gui
 Version:        0.4.1
 Release:        1%{?dist}
-Summary:        A GUI application for ChatGPT.
-
+Summary:        An unofficial GUI app for ChatGPT.
 License:        MIT
-URL:            https://github.com/Cubicpath/ChatGPT-GUI
-Source0:        %{name}-%{version}.tar.gz
+URL:            https://pypi.org/project/chatgpt-gui/
+Source:         %{pypi_source chatgpt-gui}
 
+BuildArch:      noarch
 BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-wheel
-BuildRequires:  python3-numpy
-BuildArch: noarch
 
-Requires:       python3-tkinter
+%global _description %{expand:
+This is package 'chatgpt-gui' generated automatically by pyp2spec.}
 
-%description
-ChatGPT GUI is an interactive GUI application for ChatGPT.
+%description %_description
+
+%package -n     python3-chatgpt-gui
+Summary:        %{summary}
+
+%description -n python3-chatgpt-gui %_description
 
 %prep
-%autosetup -n %{name}-%{version}
+%autosetup -p1 -n chatgpt-gui-%{version}
+
+%generate_buildrequires
+%pyproject_buildrequires
 
 %build
+%pyproject_wheel
 
 %install
-%py3_build
-%py3_install
+%pyproject_install
+%pyproject_save_files '*' +auto
 
-%files
-%license LICENSE
-%doc README.md
-%{_bindir}/chatgpt-gui
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/pixmaps/%{name}.png
+%check
+%pyproject_check_import
+
+%files -n python3-chatgpt-gui -f %{pyproject_files}
 
 %changelog
-* Fri Mar 17 2023 Kalvin McCallum <kalvin_mccallum@student.uml.edu> - 0.4.1-1
-- Updated package version and release number
-- Removed the -p1 option in %prep section
-- No other changes made.
+* Thu Mar 23 2023 Kalvin McCallum <kalvin_mccallum@student.uml.edu> - 0.4.1-1
+- Initial package
